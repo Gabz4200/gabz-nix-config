@@ -22,7 +22,7 @@
   ];
 
   networking = {
-    hostName = "maia";
+    hostName = "hermes";
   };
 
   boot = {

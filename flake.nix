@@ -1,21 +1,24 @@
 {
-  description = "My NixOS configuration";
+  description = "Gabz NixOS configuration";
 
   nixConfig = {
     extra-substituters = [
-      "https://cache.m7.rs"
+      "https://install.determinate.systems"
       "https://nix-gaming.cachix.org"
     ];
     extra-trusted-public-keys = [
-      "cache.m7.rs:kszZ/NSwE/TjhOcPPQ16IuUiuRSisdiIwhKZCxguaWg="
+      "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM="
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
     ];
   };
 
   inputs = {
     # Nix ecosystem
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
+    nixpkgs-stable.url = "https://flakehub.com/f/NixOS/nixpkgs/*";
     systems.url = "github:nix-systems/default-linux";
+
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
 
     hardware.url = "github:nixos/nixos-hardware";
     nix-colors.url = "github:misterio77/nix-colors";
@@ -32,11 +35,6 @@
     sops-nix = {
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixos-mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-25_05.follows = "nixpkgs";
     };
     nix-gl = {
       url = "github:nix-community/nixgl";
@@ -69,16 +67,6 @@
     # My own programs, packaged with nix
     themes = {
       url = "github:misterio77/themes";
-      inputs.systems.follows = "systems";
-    };
-    website = {
-      url = "github:misterio77/website";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.systems.follows = "systems";
-    };
-    paste-misterio-me = {
-      url = "github:misterio77/paste.misterio.me";
-      inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
     };
   };
@@ -114,50 +102,21 @@
 
     nixosConfigurations = {
       # Main desktop
-      atlas = lib.nixosSystem {
-        modules = [./hosts/atlas];
+      odin = lib.nixosSystem {
+        modules = [
+          inputs.determinate.nixosModules.default
+          ./hosts/odin
+        ];
         specialArgs = {
           inherit inputs outputs;
         };
       };
-      # Living room desktop
-      pleione = lib.nixosSystem {
-        modules = [./hosts/pleione];
-        specialArgs = {
-          inherit inputs outputs;
-        };
-      };
-      # Personal laptop (Framework 13)
-      maia = lib.nixosSystem {
-        modules = [./hosts/maia];
-        specialArgs = {
-          inherit inputs outputs;
-        };
-      };
-      # Core server (Vultr)
-      alcyone = lib.nixosSystem {
-        modules = [./hosts/alcyone];
-        specialArgs = {
-          inherit inputs outputs;
-        };
-      };
-      # Build and game server (Oracle)
-      celaeno = lib.nixosSystem {
-        modules = [./hosts/celaeno];
-        specialArgs = {
-          inherit inputs outputs;
-        };
-      };
-      # Build and game server (Magalu Cloud)
-      taygeta = lib.nixosSystem {
-        modules = [./hosts/taygeta];
-        specialArgs = {
-          inherit inputs outputs;
-        };
-      };
-      # Media server (RPi)
-      merope = lib.nixosSystem {
-        modules = [./hosts/merope];
+      # Personal laptop (Asus Vivobook)
+      hermes = lib.nixosSystem {
+        modules = [
+          inputs.determinate.nixosModules.default
+          ./hosts/hermes
+        ];
         specialArgs = {
           inherit inputs outputs;
         };
@@ -166,9 +125,12 @@
 
     # Standalone HM only
     homeConfigurations = {
-      # Work laptop
-      "gabz@electra" = lib.homeManagerConfiguration {
-        modules = [ ./home/gabz/electra.nix ./home/gabz/nixpkgs.nix ];
+      # Personal laptop
+      "gabz@hermes" = lib.homeManagerConfiguration {
+        modules = [
+          ./home/gabz/hermes.nix 
+          ./home/gabz/nixpkgs.nix
+        ];
         pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {
           inherit inputs outputs;

@@ -24,7 +24,7 @@
   ];
 
   networking = {
-    hostName = "atlas";
+    hostName = "odin";
     useDHCP = true;
   };
 
