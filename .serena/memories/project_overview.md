@@ -1,0 +1,6 @@
+# Project Overview
+- Purpose: Flake-driven NixOS and Home Manager configuration for personal hosts (`odin`, `hermes`) plus standalone `gabz@hermes` profile, layering shared modules, optional features, and custom packages.
+- Tech stack: Nix flakes, NixOS modules, Home Manager, impermanence, sops-nix, nix-colors, nix-gl, custom overlays/packages; shell tooling via `nix develop`.
+- Structure: `flake.nix` wires inputs/outputs; `hosts/**` composes hardware configs, global modules, and optional capabilities; `home/gabz/**` provides user environments and feature modules; `modules/nixos` and `modules/home-manager` expose reusable components auto-imported by hosts/homes; `overlays/` patches/upstreams; `pkgs/` holds custom derivations; `templates/python` offers project skeletons; scripts like `deploy.sh` enable remote rebuilds.
+- Integrations: Secrets managed with `sops` + age recipients from `hosts/common/global/sops.nix`; persistence via `optin-persistence.nix`; graphics wrappers rely on `nix-gl`.
+- Notable expectations: Enable `NixOS MCP` workspace tool before/after editing `.nix`; feature modules assume supporting services (e.g., Hyprland stack needs mako/playerctld).
