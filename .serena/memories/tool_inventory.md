@@ -1,0 +1,10 @@
+# Tool Inventory
+
+- **Built-in (VS Code)**: `changes` (review git diffs), `edit` (apply text edits), `extensions` (search marketplace), `fetch` (pull webpage content), `githubRepo` (search public repos), `new` (scaffold VS Code project tasks), `getProjectSetupInfo` (suggest tasks.json after project scaffold), `installExtension` (add VS Code extensions), `newWorkspace` (create workspace scaffolding), `runVscodeCommand` (invoke VS Code commands), `openSimpleBrowser` (preview URLs), `problems` (list diagnostics), `runCommands` (execute shell commands), `runNotebooks` (run notebook cells), `runTasks` (invoke tasks.json entries), `search` (search workspace files), `testFailure` (surface last unit test failure), `think` (structured reflection), `todos` (manage todo list), `usages` (find references), `vscodeAPI` (query VS Code API info).
+- **MCP Server: Misterio77/nix-config template docs**: `fetch_generic_url_content`, `fetch_nix_config_documentation`, `search_nix_config_code`, `search_nix_config_documentation`.
+- **MCP Server: cognitionai/deepwiki**: `ask_question`, `read_wiki_contents`, `read_wiki_structure`.
+- **MCP Server: nixos**: `home_manager_info`, `home_manager_list_options`, `home_manager_options_by_prefix`, `home_manager_search`, `home_manager_stats`, `nixhub_find_version`, `nixhub_package_versions`, `nixos_channels`, `nixos_flakes_search`, `nixos_flakes_stats`, `nixos_info`, `nixos_search`, `nixos_stats`.
+- **MCP Server: oraios/serena**: `activate_project`, `check_onboarding_performed`, `delete_memory`, `find_file`, `find_referencing_symbols`, `find_symbol`, `get_current_config`, `get_symbols_overview`, `insert_after_symbol`, `insert_before_symbol`, `list_dir`, `list_memories`, `onboarding`, `read_memory`, `replace_symbol_body`, `search_for_pattern`, `think_about_collected_information`, `think_about_task_adherence`, `think_about_whether_you_are_done`, `write_memory`.
+- **MCP Server: upstash/context7**: `get-library-docs`, `resolve-library-id`.
+
+Use this list to describe tooling expectations in `.github/copilot-instructions.md` and to choose the appropriate helper when automating repo tasks.

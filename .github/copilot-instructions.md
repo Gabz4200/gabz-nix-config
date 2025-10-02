@@ -40,6 +40,15 @@
 - MCP helpers: `#codebase` for cross-repo search, `#mcp_oraios_serena_get_symbols_overview` for symbol maps, `#mcp_oraios_serena_read_memory` for stored guidance, `#mcp_oraios_serena_onboarding` if metadata drifts.
 - Pull upstream option docs via `#mcp_upstash_conte_get-library-docs` or `#mcp_nixos_nixos_search`, reconciling results with local overrides before editing modules.
 
+## 🧰 Tool reference
+
+- **VS Code built-ins**: `changes` (diffs), `edit` (apply edits), `extensions` (marketplace search), `fetch` (web capture), `githubRepo` (search remote repos), `new` & `newWorkspace` (scaffold VS Code project tasks), `getProjectSetupInfo` (suggest tasks.json entries), `installExtension`, `runVscodeCommand`, `openSimpleBrowser`, `problems`, `runCommands`, `runNotebooks`, `runTasks`, `search`, `testFailure`, `think`, `todos`, `usages`, `vscodeAPI`.
+- **Misterio77/nix-config docs**: `fetch_generic_url_content`, `fetch_nix_config_documentation`, `search_nix_config_code`, `search_nix_config_documentation` for upstream template insight.
+- **CognitionAI DeepWiki**: `ask_question`, `read_wiki_contents`, `read_wiki_structure` to mine external GitHub wikis referenced by overlays or modules.
+- **NixOS option suite**: `home_manager_info`, `home_manager_list_options`, `home_manager_options_by_prefix`, `home_manager_search`, `home_manager_stats`, `nixhub_find_version`, `nixhub_package_versions`, `nixos_channels`, `nixos_flakes_search`, `nixos_flakes_stats`, `nixos_info`, `nixos_search`, `nixos_stats` when auditing options or package availability.
+- **Serena workspace tools**: `activate_project`, `check_onboarding_performed`, `delete_memory`, `find_file`, `find_referencing_symbols`, `find_symbol`, `get_current_config`, `get_symbols_overview`, `insert_after_symbol`, `insert_before_symbol`, `list_dir`, `list_memories`, `onboarding`, `read_memory`, `replace_symbol_body`, `search_for_pattern`, `think_about_collected_information`, `think_about_task_adherence`, `think_about_whether_you_are_done`, `write_memory` for repo-aware navigation and reflection.
+- **Upstash Context7**: `resolve-library-id`, `get-library-docs` to fetch authoritative library documentation before modifying integrations.
+
 ## ✅ Finish strong
 
 - Review git diff, ensure only intentional changes remain, and stage before committing.
