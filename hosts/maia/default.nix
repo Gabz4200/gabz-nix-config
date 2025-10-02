@@ -10,7 +10,7 @@
     ./hardware-configuration.nix
 
     ../common/global
-    ../common/users/gabriel
+    ../common/users/gabz
 
     ../common/optional/peripherals.nix
     ../common/optional/regreet.nix

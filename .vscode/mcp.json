@@ -3,6 +3,10 @@
     "nixos": {
       "command": "uvx",
       "args": ["mcp-nixos"]
+    },
+    "Misterio77/nix-config nix-config template Docs": {
+      "type": "sse",
+      "url": "https://gitmcp.io/Misterio77/nix-config"
     }
   }
 }
