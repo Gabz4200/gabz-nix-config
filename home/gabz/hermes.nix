@@ -1,8 +1,12 @@
 {
   pkgs,
   inputs,
+  lib,
   ...
-}: {
+}: let
+  nixglPkgs = pkgs.extend inputs.nix-gl.overlay;
+  nixglAuto = nixglPkgs.nixgl.auto;
+in {
   imports = [
     ./global
     ./features/desktop/hyprland
@@ -24,13 +28,23 @@
 
   targets.genericLinux.enable = true;
   nixGL = {
-    packages = inputs.nix-gl.packages;
+    packages =
+      nixglAuto
+      // {
+        default = nixglAuto.nixGLDefault;
+        nixGLDefault = nixglAuto.nixGLDefault;
+        nixGLNvidia = nixglAuto.nixGLNvidia;
+        nixGLNvidiaBumblebee = nixglAuto.nixGLNvidiaBumblebee;
+        nixVulkanNvidia = nixglAuto.nixVulkanNvidia;
+        nixGLIntel = nixglPkgs.nixgl.nixGLIntel;
+        nixVulkanIntel = nixglPkgs.nixgl.nixVulkanIntel;
+      };
     defaultWrapper = "mesa";
     installScripts = ["mesa"];
     vulkan.enable = true;
   };
 
-  monitors = [
+  monitors = lib.mkForce [
     {
       name = "eDP-1";
       width = 1920;

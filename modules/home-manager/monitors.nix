@@ -49,6 +49,7 @@ in {
       }
     );
     default = [];
+    apply = lib.unique;
   };
   config = {
     assertions = [

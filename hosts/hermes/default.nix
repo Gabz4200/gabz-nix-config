@@ -13,6 +13,8 @@
     inputs.hardware.nixosModules.common-hidpi
     inputs.hardware.nixosModules.asus-battery
 
+    inputs.home-manager.nixosModules.home-manager
+
     ./hardware-configuration.nix
 
     ../common/global
@@ -116,6 +118,10 @@
     ];
   };
 
+  # Home Manager
+
+  # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
+
   powerManagement.powertop.enable = true;
   programs = {
     light.enable = true;
@@ -134,8 +140,12 @@
   hardware.graphics.enable = true;
   home-manager.extraSpecialArgs.hmUseGlobalPkgs = true;
   home-manager.users.gabz.imports = [
+    ../../home/gabz/hermes.nix
     ../../home/gabz/nixpkgs.nix
   ];
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
 
   system.stateVersion = lib.mkForce "25.05";
 }

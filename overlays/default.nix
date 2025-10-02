@@ -84,13 +84,25 @@ in {
       NIX_CFLAGS_COMPILE = ["-fno-fast-math"];
     });
 
-    # Provide legacy mesa.drivers attribute without triggering deprecation warnings
+    # SHOULD: Provide legacy mesa.drivers attribute without triggering deprecation warnings
     mesa = let
       base = prev.mesa;
     in
       base
       // {
         drivers = base;
+      };
+
+    pkgsi686Linux =
+      prev.pkgsi686Linux
+      // {
+        mesa = let
+          base = prev.pkgsi686Linux.mesa;
+        in
+          base
+          // {
+            drivers = base;
+          };
       };
   };
 }

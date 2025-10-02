@@ -4,9 +4,13 @@
       "command": "uvx",
       "args": ["mcp-nixos"]
     },
-    "Misterio77/nix-config nix-config template Docs": {
+    "Misterio77/nix-config-template-docs": {
       "type": "sse",
       "url": "https://gitmcp.io/Misterio77/nix-config"
+    },
+    "hydenix-docs": {
+      "type": "sse",
+      "url": "https://gitmcp.io/richen604/hydenix"
     }
   }
 }
