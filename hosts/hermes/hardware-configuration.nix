@@ -11,8 +11,10 @@
 
   nixpkgs.hostPlatform.system = "x86_64-linux";
   boot.binfmt.emulatedSystems = [
-    "aarch64-linux"
-    "i686-linux"
+    "aarch64-linux"      # Keep for ARM Linux and Android (common for cross-platform builds)
+    "wasm32-wasi"        # WebAssembly 32-bit
+    "wasm64-wasi"        # WebAssembly 64-bit (if I need it)
+    "x86_64-windows"     # Windows 64-bit (rare, but I mentioned it)
   ];
   hardware.cpu.intel.updateMicrocode = true;
   powerManagement.cpuFreqGovernor = "ondemand";

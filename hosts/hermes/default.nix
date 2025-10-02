@@ -70,6 +70,9 @@
     vaapiDriver = "intel-media-driver";
   };
 
+  programs.appimage.enable = true;
+  programs.appimage.binfmt = true;
+
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   # todo: Change to enable Xwayland
