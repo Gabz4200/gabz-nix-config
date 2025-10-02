@@ -1,3 +1,5 @@
+NOTE: This is NOT the original nix-conf from Misterio77, its Gabz's config, that used Misterios's as template.
+
 [![built with nix](https://img.shields.io/static/v1?logo=nixos&logoColor=white&label=&message=Built%20with%20Nix&color=41439a)](https://builtwithnix.org)
 [![hydra status](https://img.shields.io/endpoint?url=https://hydra.m7.rs/job/nix-config/main/hosts.atlas/shield)](https://hydra.m7.rs/jobset/nix-config/main#tabs-jobs)
 
@@ -20,7 +22,6 @@ Looking for something simpler to start out with flakes? Try [my starter config r
 - **Declarative** **themes** and **wallpapers** with **nix-colors**
 - **Hydra CI/CD server and binary cache** that uses the **desktops as remote builders**
 
-
 ## About the installation
 
 All my computers use a single btrfs (encrypted on all except headless systems)
@@ -30,16 +31,17 @@ using `impermanence`), swap file, and a root subvolume (cleared on every boot).
 Home-manager is used in a standalone way, and because of opt-in persistence is
 activated on every boot with `loginShellInit`.
 
-
 ## How to bootstrap
 
 All you need is nix (any version). Run:
+
 ```
 nix-shell
 ```
 
 If you already have nix 2.4+, git, and have already enabled `flakes` and
 `nix-command`, you can also use the non-legacy command:
+
 ```
 nix develop
 ```
@@ -51,7 +53,6 @@ nix develop
 `nix build` (or shell or run) To build and use packages
 
 `sops` To manage secrets
-
 
 ## Secrets
 
@@ -107,9 +108,8 @@ Nixy stuff:
 Let me know if you have any questions about them :)
 
 ## Unixpornish stuff
+
 ![fakebusy](https://i.imgur.com/PZ4L7TR.png)
 ![clean](https://i.imgur.com/T5FjqbZ.jpg)
 
 That's how my hyprland desktop setup look like (as of 2022 July).
-
-
