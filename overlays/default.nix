@@ -83,5 +83,14 @@ in {
     gamescope = prev.gamescope.overrideAttrs (_: {
       NIX_CFLAGS_COMPILE = ["-fno-fast-math"];
     });
+
+    # Provide legacy mesa.drivers attribute without triggering deprecation warnings
+    mesa = let
+      base = prev.mesa;
+    in
+      base
+      // {
+        drivers = base;
+      };
   };
 }

@@ -3,8 +3,8 @@
   config,
   ...
 }: {
-  home.packages = [pkgs.sublime-music];
+  home.packages = [pkgs.supersonic];
   home.persistence = {
-    "/persist".directories = [".config/sublime-music"];
+    "/persist".directories = [".config/supersonic"];
   };
 }

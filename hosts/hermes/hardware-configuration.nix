@@ -20,9 +20,7 @@
   networking.useDHCP = lib.mkDefault true;
 
   boot.resumeDevice = "/dev/mapper/${config.networking.hostName}";
-  services.systemd.extraConfig = ''
-    DefaultTimeoutStopSec=300s
-  '';
+  systemd.settings.Manager.DefaultTimeoutStopSec = "300s";
 
   boot = {
     initrd = {
@@ -35,8 +33,16 @@
         "sdhci_pci"
       ];
       kernelModules = ["kvm-intel"];
-      postDeviceCommands = ''
-        wait-for-device ${config.boot.resumeDevice}
+    };
+    initrd.systemd.services.wait-for-resume-device = {
+      description = "Wait for resume device";
+      wantedBy = ["initrd.target"];
+      after = ["systemd-udev-settle.service"];
+      serviceConfig.Type = "oneshot";
+      script = ''
+        while [ ! -e ${lib.escapeShellArg config.boot.resumeDevice} ]; do
+          sleep 1
+        done
       '';
     };
     loader = {

@@ -82,7 +82,7 @@ Most relevant user apps daily drivers:
 - wofi
 - bat + fd + rg
 - kdeconnect
-- sublime-music
+- supersonic
 
 Some of the services I host:
 

@@ -100,16 +100,16 @@
     formatter = forEachSystem (pkgs: pkgs.alejandra);
 
     nixosConfigurations = {
-      # Main desktop
-      odin = lib.nixosSystem {
-        modules = [
-          inputs.determinate.nixosModules.default
-          ./hosts/odin
-        ];
-        specialArgs = {
-          inherit inputs outputs;
-        };
-      };
+      # Main desktop (It doenst exists yet)
+      # odin = lib.nixosSystem {
+      #   modules = [
+      #     inputs.determinate.nixosModules.default
+      #     ./hosts/odin
+      #   ];
+      #   specialArgs = {
+      #     inherit inputs outputs;
+      #   };
+      # };
       # Personal laptop (Asus Vivobook)
       hermes = lib.nixosSystem {
         modules = [

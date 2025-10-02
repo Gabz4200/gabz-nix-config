@@ -6,8 +6,12 @@
   ...
 }: {
   imports = [
-    inputs.hardware.nixosModules.common-pc-ssd
-    inputs.hardware.nixosModules.framework-13-7040-amd
+    inputs.hardware.nixosModules.common-pc-laptop-ssd
+    inputs.hardware.nixosModules.common-pc-laptop
+    inputs.hardware.nixosModules.common-cpu-intel
+    inputs.hardware.nixosModules.common-gpu-intel
+    inputs.hardware.nixosModules.common-hidpi
+    inputs.hardware.nixosModules.asus-battery
 
     ./hardware-configuration.nix
 
@@ -27,12 +31,6 @@
     hostName = "hermes";
   };
 
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "America/Bahia";
-
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -48,13 +46,25 @@
     LC_TIME = "pt_BR.UTF-8";
   };
 
+  # GPU
+  boot.kernelParams = [
+    "i915.enable_guc=2"
+    "i915.enable_fbc=1"
+    "i915.enable_psr=2"
+
+    # Internet broke without
+    "pcie_aspm=off"
+  ];
+
+  hardware.intelgpu = {
+    computeRuntime = "legacy";
+    vaapiDriver = "intel-media-driver";
+  };
+
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   # todo: Change to enable Xwayland
   services.xserver.enable = true;
-
-  # Configure console keymap
-  console.keyMap = "br-abnt2";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -84,6 +94,7 @@
   environment.systemPackages = with pkgs; [
     wget
     neovim
+    brightnessctl
   ];
 
   # Fix Internet Driver
@@ -91,7 +102,6 @@
   boot.extraModulePackages = with config.boot.kernelPackages; [
     rtl8821ce
   ];
-  boot.kernelParams = ["pcie_aspm=off"];
 
   # Better for old hardware
   hardware.enableAllFirmware = true;
@@ -112,17 +122,20 @@
     adb.enable = true;
     dconf.enable = true;
   };
-  environment.systemPackages = [pkgs.brightnessctl];
 
   # Lid settings
-  services.logind = {
-    lidSwitch = "suspend";
-    lidSwitchExternalPower = "lock";
-    powerKey = "suspend";
-    powerKeyLongPress = "poweroff";
+  services.logind.settings.Login = {
+    HandleLidSwitch = "suspend";
+    HandleLidSwitchExternalPower = "lock";
+    HandlePowerKey = "suspend";
+    HandlePowerKeyLongPress = "poweroff";
   };
 
   hardware.graphics.enable = true;
+  home-manager.extraSpecialArgs.hmUseGlobalPkgs = true;
+  home-manager.users.gabz.imports = [
+    ../../home/gabz/nixpkgs.nix
+  ];
 
   system.stateVersion = lib.mkForce "25.05";
 }

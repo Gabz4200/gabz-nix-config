@@ -1,4 +1,8 @@
-{lib, ...}: {
+{
+  lib,
+  config,
+  ...
+}: {
   i18n = {
     defaultLocale = lib.mkDefault "en_US.UTF-8";
     extraLocaleSettings = {
@@ -10,6 +14,8 @@
     ];
   };
   location.provider = "geoclue2";
-  time.timeZone = lib.mkDefault "America/Sao_Paulo";
+  time = lib.mkIf (!config.services.automatic-timezoned.enable) {
+    timeZone = lib.mkDefault "America/Sao_Paulo";
+  };
   services.automatic-timezoned.enable = true;
 }
