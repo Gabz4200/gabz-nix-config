@@ -18,7 +18,7 @@
     ../common/optional/pipewire.nix
     ../common/optional/quietboot.nix
     ../common/optional/wireless.nix
-    ../common/optional/lxd.nix
+    ../common/optional/incus.nix
 
     ../common/optional/starcitizen-fixes.nix
   ];

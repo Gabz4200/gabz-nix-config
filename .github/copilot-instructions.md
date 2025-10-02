@@ -3,7 +3,7 @@
 ## 🗺️ Architecture essentials
 
 - Flake drives NixOS + Home Manager for hosts `hermes`, `odin`, and the standalone profile `gabz@hermes`.
-- `flake.nix` wires inputs (home-manager, impermanence, sops-nix, nix-gl, nix-colors, nix-gaming, determinate) and exports lib, overlays, packages, dev shells, and Hydra jobs.
+- `flake.nix` wires inputs (home-manager, impermanence, sops-nix, nix-gl, nix-colors, nix-gaming, determinate) and exports lib, overlays, packages, and dev shells.
 - Host modules under `hosts/<name>/` import shared globals, optional capabilities, then host overrides alongside hardware data.
 - Shared logic in `hosts/common/global` auto-imports `modules/nixos/default.nix`, enabling impermanence, tailscale, nix-ld, upgrades, and display/power tweaks everywhere.
 - `hosts/common/users/gabz` provisions the primary user, sourcing keys from `home/gabz/ssh.pub` and secrets from `hosts/common/secrets.yaml`.
@@ -23,7 +23,7 @@
 - Run VS Code “NixOS MCP: Refresh” before and after editing `.nix` files so symbol metadata stays current.
 - Build systems locally via `nixos-rebuild --flake .#hermes switch`; `./deploy.sh hermes[,odin]` wraps remote rebuilds with SSH control reuse.
 - Apply user profiles using `home-manager --flake .#gabz@hermes switch`.
-- Exercise packages with `nix build .#packages.$SYSTEM.<name>` before wiring them into hosts or Hydra.
+- Exercise packages with `nix build .#packages.$SYSTEM.<name>` before wiring them into hosts.
 - Finish every task by running `alejandra .` and `nix flake check`; don’t commit until both succeed.
 
 ## 🔐 Persistence, secrets, graphics
@@ -34,7 +34,6 @@
 
 ## 🧭 Tooling extras
 
-- Hydra jobs in `hydra.nix` publish redistributable packages plus nixos/home configurations.
 - Language templates (e.g., `templates/python/`) mirror overlay expectations; copy them when adding starters.
 - Desktop bindings live in `home/gabz/features/desktop/**`; keep brightness/audio shortcuts aligned with swayosd + brightnessctl helpers.
 - MCP helpers: `#codebase` for cross-repo search, `#mcp_oraios_serena_get_symbols_overview` for symbol maps, `#mcp_oraios_serena_read_memory` for stored guidance, `#mcp_oraios_serena_onboarding` if metadata drifts.
@@ -53,3 +52,5 @@
 
 - Review git diff, ensure only intentional changes remain, and stage before committing.
 - For host/profile edits, optionally dry-run `nixos-rebuild --flake .#<host> build` or `home-manager --flake .#gabz@hermes build` to catch evaluation surprises early.
+
+ALWAYS use `read_memory` from serena to read all memories in the start of any new main task on the sessions.

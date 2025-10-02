@@ -1,0 +1,3 @@
+creation_rules:
+  - path_regex: hosts/common/secrets\.yaml
+    age: age1760zlef5j6zxaart39wpzgyerpu000uf406t2kvl2c8nlyscygyse6c67x

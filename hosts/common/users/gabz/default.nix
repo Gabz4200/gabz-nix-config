@@ -6,7 +6,7 @@
 }: let
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in {
-  users.mutableUsers = false;
+  users.mutableUsers = true;
   users.users.gabz = {
     isNormalUser = true;
     shell = pkgs.fish;
@@ -17,21 +17,37 @@ in {
       "git"
       "i2c"
       "libvirtd"
-      "lxd"
+      "incus"
+      "incus-admin"
       "minecraft"
       "mysql"
       "network"
       "plugdev"
       "podman"
+      "realtime"
       "tss"
       "video"
       "wheel"
       "wireshark"
+      "networkmanager"
     ];
 
     openssh.authorizedKeys.keys = lib.splitString "\n" (builtins.readFile ../../../../home/gabz/ssh.pub);
     hashedPasswordFile = config.sops.secrets.gabz-password.path;
-    packages = [pkgs.home-manager];
+    packages = with pkgs; [
+      kdePackages.kate
+      vscode.fhs
+      nixd
+      alejandra
+      uv
+      nodejs
+      python3
+      cachix
+      home-manager
+      git
+      chromium
+      firefox-bin
+    ];
   };
 
   sops.secrets.gabz-password = {
