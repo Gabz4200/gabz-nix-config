@@ -64,6 +64,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hydenix = {
+      url = "github:richen604/hydenix/dev";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+      inputs.nixos-hardware.follows = "hardware";
+    };
+
     # My own programs, packaged with nix
     themes = {
       url = "github:misterio77/themes";

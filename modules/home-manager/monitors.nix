@@ -11,7 +11,7 @@ in {
         options = {
           name = mkOption {
             type = types.str;
-            example = "DP-1";
+            example = "eDP-1";
           };
           primary = mkOption {
             type = types.bool;

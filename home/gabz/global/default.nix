@@ -36,7 +36,7 @@
   home = {
     username = lib.mkDefault "gabz";
     homeDirectory = lib.mkDefault "/home/${config.home.username}";
-    stateVersion = lib.mkDefault "22.05";
+    stateVersion = lib.mkDefault "25.05";
     sessionPath = ["$HOME/.local/bin"];
     sessionVariables = {
       NH_FLAKE = "$HOME/Documents/NixConfig";

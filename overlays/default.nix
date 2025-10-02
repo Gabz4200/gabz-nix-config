@@ -62,22 +62,11 @@ in {
             --prefix XDG_DATA_DIRS : ${schemaPath final.gtk3}
           )
         '');
-      patches =
-        (oldAttrs.patches or [])
-        ++ [
-          # Repaint tabs when colorscheme changes
-          ./qutebrowser-refresh-tab-colorscheme.patch
-        ];
     });
 
     wl-clipboard = addPatches prev.wl-clipboard [./wl-clipboard-secrets.diff];
 
     pass = addPatches prev.pass [./pass-wlclipboard-secret.diff];
-
-    vdirsyncer = addPatches prev.vdirsyncer [./vdirsyncer-fixed-oauth-token.patch];
-
-    # https://github.com/pimutils/todoman/pull/594
-    todoman = addPatches prev.todoman [./todoman-latest-main.patch ./todoman-subtasks.patch];
 
     # https://github.com/ValveSoftware/gamescope/issues/1622
     gamescope = prev.gamescope.overrideAttrs (_: {

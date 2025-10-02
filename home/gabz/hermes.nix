@@ -14,6 +14,9 @@ in {
     ./features/productivity
     ./features/pass
     ./features/games
+    ./features/games/factorio.nix
+    ./features/games/osu.nix
+    ./features/games/star-citizen.nix
   ];
 
   # Purple

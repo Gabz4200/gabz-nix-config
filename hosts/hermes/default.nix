@@ -13,16 +13,15 @@
     inputs.hardware.nixosModules.common-hidpi
     inputs.hardware.nixosModules.asus-battery
 
-    inputs.home-manager.nixosModules.home-manager
-
     ./hardware-configuration.nix
 
     ../common/global
     ../common/users/gabz
 
-    ../common/optional/regreet.nix
     ../common/optional/pipewire.nix
-    ../common/optional/quietboot.nix
+    ../common/optional/incus.nix
+    ../common/optional/tlp.nix
+    ../common/optional/docker.nix
   ];
 
   networking = {
@@ -31,9 +30,8 @@
       enable = true;
       wifi.powersave = false;
     };
-    wireless.enable = false;
     nameservers = ["1.1.1.1" "1.0.0.1"];
-    useDHCP = false;
+    useDHCP = lib.mkForce true;
   };
 
   services.resolved = {
@@ -80,25 +78,11 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-  };
-
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
   # Install firefox.
   programs.firefox.enable = true;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

@@ -12,6 +12,7 @@ in {
       trusted-users = [
         "root"
         "@wheel"
+        "gabz"
       ];
       auto-optimise-store = lib.mkDefault true;
       experimental-features = [
@@ -38,4 +39,6 @@ in {
     registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
+
+  programs.nh.enable = true;
 }

@@ -97,15 +97,15 @@
               '';
               subvolumes = {
                 "/root" = {
-                  mountOptions = ["compress=zstd"];
+                  mountOptions = ["compress=zstd:12" "ssd"];
                   mountpoint = "/";
                 };
                 "/nix" = {
-                  mountOptions = ["compress=zstd" "noatime"];
+                  mountOptions = ["compress=zstd:12" "ssd" "noatime"];
                   mountpoint = "/nix";
                 };
                 "/persist" = {
-                  mountOptions = ["compress=zstd" "noatime"];
+                  mountOptions = ["compress=zstd:12" "ssd" "noatime"];
                   mountpoint = "/persist";
                 };
                 "/swap" = {
