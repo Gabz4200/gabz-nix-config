@@ -1,15 +1,40 @@
-{config, ...}: {
+{
+  config,
+  lib,
+  ...
+}: let
+  tasksDir = "${config.home.homeDirectory}/Tasks";
+in {
   programs.todoman = {
     enable = true;
     glob = "*/*";
     extraConfig = ''
-      default_list = "${config.accounts.calendar.accounts.personal.primaryCollection}"
+      path = "${tasksDir}"
+      default_list = "inbox"
       date_format = "%d/%m/%Y"
       time_format = "%H:%M"
       humanize = True
       default_due = 0
     '';
   };
+
+  home.persistence."/persist".directories = lib.mkAfter ["Tasks"];
+
+  accounts.calendar = {
+    basePath = "Tasks";
+    accounts.local = {
+      primary = true;
+      primaryCollection = "inbox";
+      local = {
+        type = "filesystem";
+        path = tasksDir;
+        fileExt = ".ics";
+      };
+      khal.enable = false;
+      vdirsyncer.enable = false;
+    };
+  };
+
   programs.fish.interactiveShellInit =
     /*
     fish

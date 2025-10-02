@@ -33,11 +33,9 @@ in {
       // {
         default = nixglAuto.nixGLDefault;
         nixGLDefault = nixglAuto.nixGLDefault;
-        nixGLNvidia = nixglAuto.nixGLNvidia;
-        nixGLNvidiaBumblebee = nixglAuto.nixGLNvidiaBumblebee;
-        nixVulkanNvidia = nixglAuto.nixVulkanNvidia;
         nixGLIntel = nixglPkgs.nixgl.nixGLIntel;
         nixVulkanIntel = nixglPkgs.nixgl.nixVulkanIntel;
+        # Add nixGLNvidia wrappers here if dedicated GPUs return.
       };
     defaultWrapper = "mesa";
     installScripts = ["mesa"];

@@ -16,11 +16,6 @@
   grimblast = lib.getExe pkgs.grimblast;
   pactl = lib.getExe' pkgs.pulseaudio "pactl";
   defaultApp = type: "${lib.getExe pkgs.handlr-regex} launch ${type}";
-  remote = lib.getExe (pkgs.writeShellScriptBin "remote" ''
-    socket="$(basename "$(find ~/.ssh -name 'master-gabz@*' | head -1 | cut -d ':' -f1)")"
-    host="''${socket#master-}"
-    ssh "$host" "$@"
-  '');
 in {
   imports = [
     ../common
@@ -295,9 +290,6 @@ in {
           "SUPER,Return,exec,${defaultApp "x-scheme-handler/terminal"}"
           "SUPER,e,exec,${defaultApp "text/plain"}"
           "SUPER,b,exec,${defaultApp "x-scheme-handler/https"}"
-          "SUPERALT,Return,exec,${remote} ${defaultApp "x-scheme-handler/terminal"}"
-          "SUPERALT,e,exec,${remote} ${defaultApp "text/plain"}"
-          "SUPERALT,b,exec,${remote} ${defaultApp "x-scheme-handler/https"}"
           # Screenshotting
           ",Print,exec,${grimblast} --notify --freeze copy area"
           "SHIFT,Print,exec,${grimblast} --notify --freeze copy output"
@@ -323,9 +315,6 @@ in {
               "SUPER,x,exec,${wofi} -S drun -x 10 -y 10 -W 25% -H 60%"
               "SUPER,s,exec,specialisation $(specialisation | ${wofi} -S dmenu)"
               "SUPER,d,exec,${wofi} -S run"
-
-              "SUPERALT,x,exec,${remote} ${wofi} -S drun -x 10 -y 10 -W 25% -H 60%"
-              "SUPERALT,d,exec,${remote} ${wofi} -S run"
             ]
             ++ (
               let

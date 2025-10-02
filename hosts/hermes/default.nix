@@ -20,17 +20,26 @@
     ../common/global
     ../common/users/gabz
 
-    ../common/optional/peripherals.nix
     ../common/optional/regreet.nix
     ../common/optional/pipewire.nix
     ../common/optional/quietboot.nix
-
-    ../common/optional/wireless.nix
-    ../common/optional/secure-boot.nix
   ];
 
   networking = {
     hostName = "hermes";
+    networkmanager = {
+      enable = true;
+      wifi.powersave = false;
+    };
+    wireless.enable = false;
+    nameservers = ["1.1.1.1" "1.0.0.1"];
+    useDHCP = false;
+  };
+
+  services.resolved = {
+    enable = true;
+    fallbackDns = ["9.9.9.9" "149.112.112.112"];
+    dnssec = "allow-downgrade";
   };
 
   # Select internationalisation properties.
