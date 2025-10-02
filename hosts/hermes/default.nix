@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   imports = [
@@ -51,5 +52,5 @@
 
   hardware.graphics.enable = true;
 
-  system.stateVersion = "22.05";
+  system.stateVersion = lib.mkForce "25.05";
 }

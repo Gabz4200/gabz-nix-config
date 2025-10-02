@@ -24,10 +24,12 @@
 
   environment.persistence = {
     # Persist last user and last selected session
-    "/persist".directories = [{
-      directory = "/var/lib/regreet";
-      user = "greeter";
-      group = "greeter";
-    }];
+    "/persist".directories = [
+      {
+        directory = "/var/lib/regreet";
+        user = "greeter";
+        group = "greeter";
+      }
+    ];
   };
 }

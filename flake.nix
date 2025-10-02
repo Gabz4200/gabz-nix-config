@@ -128,7 +128,7 @@
       # Personal laptop
       "gabz@hermes" = lib.homeManagerConfiguration {
         modules = [
-          ./home/gabz/hermes.nix 
+          ./home/gabz/hermes.nix
           ./home/gabz/nixpkgs.nix
         ];
         pkgs = pkgsFor.x86_64-linux;

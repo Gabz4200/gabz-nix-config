@@ -22,10 +22,10 @@ in {
         postInstall = ''
           wrapProgram $out/bin/oama \
             --prefix PATH : ${lib.makeBinPath [
-              pkgs.coreutils
-              pkgs.libsecret
-              pkgs.gnupg
-            ]}
+            pkgs.coreutils
+            pkgs.libsecret
+            pkgs.gnupg
+          ]}
         '';
       });
     };

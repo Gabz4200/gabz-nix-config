@@ -1,5 +1,9 @@
-{lib, rustPlatform, fetchFromGitHub, ...}:
-
+{
+  lib,
+  rustPlatform,
+  fetchFromGitHub,
+  ...
+}:
 rustPlatform.buildRustPackage {
   pname = "prefetcharr";
   version = "1.2.0";

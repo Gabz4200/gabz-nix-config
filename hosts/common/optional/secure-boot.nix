@@ -11,7 +11,12 @@
 #      - PCR0+2: UEFI integrity
 #      - PCR12+13+14: Boot loader integrity
 #      - PCR15: No LUKS partition has been opened yet
-{pkgs, inputs, lib, ...}: {
+{
+  pkgs,
+  inputs,
+  lib,
+  ...
+}: {
   imports = [
     inputs.lanzaboote.nixosModules.lanzaboote
   ];

@@ -1,5 +1,4 @@
-{pkgs, ...}:
-{
+{pkgs, ...}: {
   home.sessionVariables = {
     # Required for qt5, for some reason.
     QT_STYLE_OVERRIDE = "gtk3";

@@ -6,11 +6,13 @@
   };
 
   environment.persistence = {
-    "/persist".directories = [{
-      directory = "/var/lib/acme";
-      user = "acme";
-      group = "acme";
-      mode = "0700";
-    }];
+    "/persist".directories = [
+      {
+        directory = "/var/lib/acme";
+        user = "acme";
+        group = "acme";
+        mode = "0700";
+      }
+    ];
   };
 }

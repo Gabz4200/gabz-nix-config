@@ -1,4 +1,8 @@
-{inputs, config, ...}: {
+{
+  inputs,
+  config,
+  ...
+}: {
   system.hydraAutoUpgrade = {
     enable = true;
     dates = "*:0/10"; # Every 10 minutes

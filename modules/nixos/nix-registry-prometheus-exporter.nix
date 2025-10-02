@@ -1,10 +1,16 @@
 # This pseudo exporter allows prometheus to scrap the machine's nix registry metadata
 # This is useful, for example, to find out the nixpkgs rev.
-{config, lib, pkgs, ...}: let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.services.prometheus.exporters.nix-registry;
-  webroot = pkgs.writeTextDir "metrics/index.txt" (lib.concatMapAttrsStringSep "\n" (name: value:
-    ''nix_registry{name="${name}",rev="${value.flake.rev or "dirty"}"} ${toString value.flake.lastModified}''
-  ) config.nix.registry);
+  webroot = pkgs.writeTextDir "metrics/index.txt" (lib.concatMapAttrsStringSep "\n" (
+      name: value: ''nix_registry{name="${name}",rev="${value.flake.rev or "dirty"}"} ${toString value.flake.lastModified}''
+    )
+    config.nix.registry);
 in {
   options.services.prometheus.exporters.nix-registry = {
     enable = lib.mkEnableOption "the prometheus nix-registry exporter";

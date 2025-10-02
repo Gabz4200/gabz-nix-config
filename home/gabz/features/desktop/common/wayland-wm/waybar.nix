@@ -6,7 +6,7 @@
   inputs,
   ...
 }: let
-  gpgCmds = import ../../../cli/gpg-commands.nix { inherit pkgs config lib; };
+  gpgCmds = import ../../../cli/gpg-commands.nix {inherit pkgs config lib;};
   commonDeps = with pkgs; [coreutils gnugrep systemd];
   # Function to simplify making waybar outputs
   mkScript = {
@@ -79,10 +79,11 @@ in {
           ++ (lib.optionals hyprlandCfg.enable [
             "hyprland/workspaces"
             "hyprland/submap"
-          ]) ++ [
+          ])
+          ++ [
             "custom/currentplayer"
             "custom/player"
-        ];
+          ];
 
         modules-right = [
           "tray"
@@ -212,7 +213,10 @@ in {
             "read" = "󰇯";
             "unread" = "󰇮";
           };
-          on-click = mkScript { deps = [pkgs.handlr-regex]; script = "handlr launch x-scheme-handler/mailto"; };
+          on-click = mkScript {
+            deps = [pkgs.handlr-regex];
+            script = "handlr launch x-scheme-handler/mailto";
+          };
         };
         "custom/next-event" = {
           interval = 10;
@@ -242,7 +246,10 @@ in {
             has-close-event = "󰨱";
             no-event = "󰃮";
           };
-          on-click = mkScript { deps = [pkgs.handlr-regex]; script = "handlr launch text/calendar"; };
+          on-click = mkScript {
+            deps = [pkgs.handlr-regex];
+            script = "handlr launch text/calendar";
+          };
         };
         "custom/gpg-status" = {
           interval = 3;
@@ -260,7 +267,7 @@ in {
             alt = "$status";
             tooltip = "$tooltip";
           };
-          on-click = mkScript { script = ''if ${gpgCmds.isUnlocked}; then ${gpgCmds.lock}; else ${gpgCmds.unlock}; fi''; };
+          on-click = mkScript {script = ''if ${gpgCmds.isUnlocked}; then ${gpgCmds.lock}; else ${gpgCmds.unlock}; fi'';};
           format = "{icon}";
           format-icons = {
             locked = "󰌾";
@@ -296,10 +303,10 @@ in {
             tooltip = "$tooltip";
             alt = "$status";
           };
-          on-click = mkScript { script = "systemctl --user start mbsync.service vdirsyncer.service"; };
+          on-click = mkScript {script = "systemctl --user start mbsync.service vdirsyncer.service";};
           format = "{icon}";
           format-icons = {
-            activating= "󰘿";
+            activating = "󰘿";
             failed = "󰧠";
             condition = "󱇱";
             success = "󰅠";

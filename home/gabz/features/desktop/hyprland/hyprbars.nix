@@ -60,22 +60,25 @@ in {
         ];
       };
 
-      windowrulev2 = [
-        # Disable bars in floating pinned windows
-        "plugin:hyprbars:nobar, floating:1, pinned:1"
+      windowrulev2 =
+        [
+          # Disable bars in floating pinned windows
+          "plugin:hyprbars:nobar, floating:1, pinned:1"
 
-        # Local focused colors (this host's colors)
-        "plugin:hyprbars:bar_color ${rgba config.colorscheme.colors.primary "ee"}, focus:1"
-        "plugin:hyprbars:title_color ${rgb config.colorscheme.colors.on_primary}, focus:1"
-      ] ++ (lib.flatten (lib.mapAttrsToList (name: colors: [
-        # Remote host colors
-        "plugin:hyprbars:bar_color ${rgba colors.primary_container "dd"}, title:\\[${name}\\].*"
-        "plugin:hyprbars:title_color ${rgb colors.on_primary_container}, title:\\[${name}\\].*"
+          # Local focused colors (this host's colors)
+          "plugin:hyprbars:bar_color ${rgba config.colorscheme.colors.primary "ee"}, focus:1"
+          "plugin:hyprbars:title_color ${rgb config.colorscheme.colors.on_primary}, focus:1"
+        ]
+        ++ (lib.flatten (lib.mapAttrsToList (name: colors: [
+            # Remote host colors
+            "plugin:hyprbars:bar_color ${rgba colors.primary_container "dd"}, title:\\[${name}\\].*"
+            "plugin:hyprbars:title_color ${rgb colors.on_primary_container}, title:\\[${name}\\].*"
 
-        # Remote host focused colors
-        "plugin:hyprbars:bar_color ${rgba colors.primary "ee"}, title:\\[${name}\\].*, focus:1"
-        "plugin:hyprbars:title_color ${rgb colors.on_primary}, title:\\[${name}\\].*, focus:1"
-      ]) config.colorscheme.hosts));
+            # Remote host focused colors
+            "plugin:hyprbars:bar_color ${rgba colors.primary "ee"}, title:\\[${name}\\].*, focus:1"
+            "plugin:hyprbars:title_color ${rgb colors.on_primary}, title:\\[${name}\\].*, focus:1"
+          ])
+          config.colorscheme.hosts));
     };
   };
 }

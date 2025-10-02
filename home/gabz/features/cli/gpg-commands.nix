@@ -1,4 +1,9 @@
-{pkgs, config, lib, ...}: let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
   pgrep = lib.getExe' pkgs.procps "pgrep";
   grep = lib.getExe pkgs.gnugrep;
   gpg-connect-agent = lib.getExe' config.programs.gpg.package "gpg-connect-agent";

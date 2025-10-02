@@ -1,4 +1,8 @@
-{pkgs, lib, ...}: let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   firefox = pkgs.wrapFirefox pkgs.firefox-unwrapped {
     extraPolicies = {
       AutofillAddressEnabled = false;
@@ -26,7 +30,7 @@
       OfferToSaveLogins = false;
       OfferToSaveLoginsDefault = false;
       OverrideFirstRunPage = "";
-      OverridePostUpdatePage =  "";
+      OverridePostUpdatePage = "";
       PasswordManagerEnabled = false;
       Homepage = {
         URL = "https://media.m7.rs";
@@ -46,9 +50,9 @@
       Exec=${lib.getExe pkgs.cage} -s -m last -- ${lib.getExe firefox} https://media.m7.rs
       Type=Application
     '').overrideAttrs
-      (_: {
-        passthru.providedSessions = [ "jellyfin-kiosk" ];
-      });
+    (_: {
+      passthru.providedSessions = ["jellyfin-kiosk"];
+    });
 in {
   services.displayManager.sessionPackages = [sessionFile];
 }

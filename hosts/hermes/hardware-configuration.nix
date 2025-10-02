@@ -1,4 +1,9 @@
-{config, inputs, ...}: {
+{
+  config,
+  inputs,
+  lib,
+  ...
+}: {
   imports = [
     inputs.disko.nixosModules.disko
     ../common/optional/ephemeral-btrfs.nix
@@ -9,19 +14,30 @@
     "aarch64-linux"
     "i686-linux"
   ];
-  hardware.cpu.amd.updateMicrocode = true;
+  hardware.cpu.intel.updateMicrocode = true;
   powerManagement.cpuFreqGovernor = "ondemand";
+
+  networking.useDHCP = lib.mkDefault true;
+
+  boot.resumeDevice = "/dev/mapper/${config.networking.hostName}";
+  services.systemd.extraConfig = ''
+    DefaultTimeoutStopSec=300s
+  '';
 
   boot = {
     initrd = {
+      systemd.enable = true;
       availableKernelModules = [
-        "nvme"
         "xhci_pci"
-        "thunderbolt"
+        "ahci"
         "usb_storage"
         "sd_mod"
+        "sdhci_pci"
       ];
-      kernelModules = ["kvm-amd"];
+      kernelModules = ["kvm-intel"];
+      postDeviceCommands = ''
+        wait-for-device ${config.boot.resumeDevice}
+      '';
     };
     loader = {
       systemd-boot = {
@@ -35,7 +51,7 @@
   disko.devices.disk.main = let
     inherit (config.networking) hostName;
   in {
-    device = "/dev/nvme0n1";
+    device = "/dev/sda";
     type = "disk";
     content = {
       type = "gpt";
@@ -46,7 +62,7 @@
         };
         esp = {
           name = "ESP";
-          size = "512M";
+          size = "1024M";
           type = "EF00";
           content = {
             type = "filesystem";
@@ -64,12 +80,14 @@
               this = config.disko.devices.disk.main.content.partitions.luks.content.content;
             in {
               type = "btrfs";
-              extraArgs = [ "-L${hostName}" ];
+              extraArgs = ["-L${hostName}"];
               postCreateHook = ''
                 MNTPOINT=$(mktemp -d)
                 mount -t btrfs "${this.device}" "$MNTPOINT"
                 trap 'umount $MNTPOINT; rm -d $MNTPOINT' EXIT
                 btrfs subvolume snapshot -r $MNTPOINT/root $MNTPOINT/root-blank
+                btrfs property set -ts "$MNTPOINT/swap" compression none
+                chattr +C "$MNTPOINT/swap"
               '';
               subvolumes = {
                 "/root" = {
@@ -85,10 +103,10 @@
                   mountpoint = "/persist";
                 };
                 "/swap" = {
-                  mountOptions = ["compress=zstd" "noatime"];
+                  mountOptions = ["noatime" "nodatacow" "nodatasum"];
                   mountpoint = "/swap";
                   swap.swapfile = {
-                    size = "16384M";
+                    size = "12288M";
                     path = "swapfile";
                   };
                 };

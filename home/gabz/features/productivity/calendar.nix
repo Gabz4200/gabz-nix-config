@@ -1,4 +1,9 @@
-{config, pkgs, lib, ...}: let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   pass = "${config.programs.password-store.package}/bin/pass";
   oama = "${config.programs.oama.package}/bin/oama";
 in {
