@@ -101,7 +101,6 @@
                 mount -t btrfs "${this.device}" "$MNTPOINT"
                 trap 'umount $MNTPOINT; rm -d $MNTPOINT' EXIT
                 btrfs subvolume snapshot -r $MNTPOINT/root $MNTPOINT/root-blank
-                btrfs property set -ts 
               '';
               subvolumes = {
                 "/root" = {
