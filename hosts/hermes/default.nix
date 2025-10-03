@@ -34,6 +34,8 @@
     useDHCP = lib.mkForce true;
   };
 
+  services.displayManager.sddm.enable = true;
+
   services.resolved = {
     enable = true;
     fallbackDns = ["9.9.9.9" "149.112.112.112"];
