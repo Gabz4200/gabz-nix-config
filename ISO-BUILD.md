@@ -61,8 +61,9 @@ When you run the automated installer, here's **exactly** what happens:
 1. **Clone your config** from Git → `/home/nixos/NixConf`
 2. **Create LUKS password** → Stored temporarily in `/tmp/luks-password`
 3. **Run Disko** → This is the critical step that partitions your disk
-4. **Copy config** → To `/mnt/persist/etc/nixos` (persistent storage)
-5. **Install NixOS** → Using your configuration
+4. **Copy config** → To `/persist/home/gabz/NixConf` (your home directory)
+5. **Create symlink** → `/etc/nixos` → `~/NixConf` (for convenience)
+6. **Install NixOS** → Using your configuration
 6. **Set passwords** → User password for login
 7. **Clean up** → Securely delete LUKS password file
 
@@ -189,7 +190,8 @@ sudo /etc/install-hermes.sh https://github.com/youruser/your-fork.git
 - Abort if Disko failed
 
 #### Phase 5: Configuration Deployment
-- Copy NixConf to `/mnt/persist/etc/nixos`
+- Copy NixConf to `/mnt/persist/home/gabz/NixConf`
+- Create symlink `/etc/nixos` → `/persist/home/gabz/NixConf`
 
 #### Phase 6: NixOS Installation
 - Run `nixos-install --flake .#hermes`

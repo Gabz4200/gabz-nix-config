@@ -141,13 +141,19 @@
 
       echo ""
       echo "Step 5: Copying config to persistent storage..."
-      mkdir -p /mnt/persist/etc/nixos
-      cp -r ./* /mnt/persist/etc/nixos/
-      echo "✓ Config copied to /mnt/persist/etc/nixos"
+      mkdir -p /mnt/persist/home/gabz/NixConf
+      cp -r ./* /mnt/persist/home/gabz/NixConf/
+      echo "✓ Config copied to /mnt/persist/home/gabz/NixConf"
+
+      echo ""
+      echo "Step 5b: Creating symlink /etc/nixos → ~/NixConf..."
+      mkdir -p /mnt/etc
+      ln -sf /persist/home/gabz/NixConf /mnt/etc/nixos
+      echo "✓ Symlink created: /etc/nixos → /persist/home/gabz/NixConf"
 
       echo ""
       echo "Step 6: Installing NixOS (this takes 10-20 minutes)..."
-      nixos-install --flake /mnt/persist/etc/nixos#hermes
+      nixos-install --flake /mnt/persist/home/gabz/NixConf#hermes
 
       echo ""
       echo "Step 7: Setting up age keys and user password..."
