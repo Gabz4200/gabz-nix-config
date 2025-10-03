@@ -132,10 +132,11 @@ To install NixOS on Hermes:
 REQUIREMENTS:
 - Internet connection (use 'nmtui' for WiFi)
 - This will DESTROY ALL DATA on /dev/sda!
-- You need to know your GitHub repo URL
+
+Configuration repo: https://github.com/Gabz4200/gabz-nix-config.git
 
 For manual installation, see:
-  https://github.com/gabz-embedonix/NixConf/blob/main/INSTALLATION.md
+  https://github.com/Gabz4200/gabz-nix-config/blob/main/INSTALLATION.md
 
 Press Enter to continue...
 ```
@@ -155,8 +156,14 @@ ping -c 3 github.com
 ### 3. Run the automated installer
 
 ```bash
+# Option 1: Use default repo (recommended)
 sudo /etc/install-hermes.sh
+
+# Option 2: Use custom repo (for forks/testing)
+sudo /etc/install-hermes.sh https://github.com/youruser/your-fork.git
 ```
+
+**Default repository**: `https://github.com/Gabz4200/gabz-nix-config.git`
 
 **The installer will:**
 

@@ -6,7 +6,7 @@
 2. **Write to USB**: Copy `result/iso/*.iso` to Ventoy USB (or use `dd`)
 3. **Boot from USB**: Select ISO from Ventoy menu
 4. **Connect WiFi**: `nmtui`
-5. **Install**: `sudo /etc/install-hermes.sh https://github.com/yourusername/NixConf.git`
+5. **Install**: `sudo /etc/install-hermes.sh`
 
 That's it! The script does everything automatically.
 
@@ -16,13 +16,55 @@ That's it! The script does everything automatically.
 
 ### Required:
 - [ ] **Internet connection** (WiFi password ready)
-- [ ] **GitHub repo URL** (where your NixConf is hosted)
 - [ ] **LUKS password** (for disk encryption, needed at every boot)
 
 ### Highly Recommended:
 - [ ] **Age private key** (format: `AGE-SECRET-KEY-1...`)
   - This decrypts your `secrets.yaml` 
-  - Without it, you'll need a temporary password initially
+  - **Without age key**: SOPS cannot decrypt → password not available → login fails (unless temporary password set)
+
+---
+
+## 🔧 Advanced: Using Custom Repository
+
+The installer uses `https://github.com/Gabz4200/gabz-nix-config.git` by default, but you can override this:
+
+### When to Use Custom Repo
+
+- **Testing a fork**: You forked the repo and want to test changes
+- **Alternative branch**: Testing a different branch/configuration
+- **Private repo**: Using your own private configuration
+
+### How to Override
+
+```bash
+# Default (uses Gabz4200/gabz-nix-config)
+sudo /etc/install-hermes.sh
+
+# Custom repo
+sudo /etc/install-hermes.sh https://github.com/youruser/your-nixconf.git
+
+# Private repo (requires authentication)
+sudo /etc/install-hermes.sh git@github.com:youruser/private-nixconf.git
+```
+
+### Important Notes
+
+1. **Custom repo must have the same structure**:
+   - `hosts/hermes/hardware-configuration.nix` (Disko config)
+   - `flake.nix` with `nixosConfigurations.hermes`
+   - Same persistence configuration
+
+2. **For private repos**:
+   - Set up SSH keys before running installer
+   - Or use HTTPS with credentials
+
+3. **Script displays the repo being used**:
+   ```
+   Repository: https://github.com/Gabz4200/gabz-nix-config.git
+   ```
+
+---
   - Your public key: `age1760zlef5j6zxaart39wpzgyerpu000uf406t2kvl2c8nlyscygyse6c67x`
 
 ### Optional:
@@ -254,8 +296,12 @@ nix build .#nixosConfigurations.iso.config.system.build.isoImage
 nmtui
 
 # 2. Run installer
-sudo /etc/install-hermes.sh https://github.com/yourusername/NixConf.git
+sudo /etc/install-hermes.sh  # Uses default repo
+# OR
+sudo /etc/install-hermes.sh https://github.com/youruser/custom-repo.git  # Custom repo
 ```
+
+**Default repo**: `https://github.com/Gabz4200/gabz-nix-config.git`
 
 **After first boot (if no age key):**
 ```bash
@@ -294,7 +340,6 @@ Before installing, ensure:
 - [ ] USB drive ready (Ventoy or raw)
 - [ ] Hermes plugged in (installation drains battery)
 - [ ] WiFi password available
-- [ ] GitHub repo URL ready (update placeholder in script!)
 - [ ] Age private key accessible (optional but recommended)
 - [ ] LUKS password chosen (strong, memorable)
 - [ ] Backup of any data on `/dev/sda` (if needed)

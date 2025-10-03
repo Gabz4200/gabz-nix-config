@@ -1,3 +1,4 @@
+
 # This file defines the "non-hardware dependent" part of opt-in persistence
 # It imports impermanence, defines the basic persisted dirs, and ensures each
 # users' home persist dir exists and has the right permissions

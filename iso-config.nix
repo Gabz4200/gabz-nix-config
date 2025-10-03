@@ -64,16 +64,22 @@
       #!/usr/bin/env bash
       set -e
 
-      REPO_URL="''${1:-https://github.com/yourusername/NixConf.git}"
+      REPO_URL="''${1:-https://github.com/Gabz4200/gabz-nix-config.git}"
 
       echo "=========================================="
       echo "  NixOS Hermes Installation Helper"
       echo "=========================================="
       echo ""
+      echo "Repository: $REPO_URL"
+      echo ""
       echo "This script will:"
       echo "  1. Clone your NixConf repository"
       echo "  2. Partition and encrypt /dev/sda with Disko"
       echo "  3. Install NixOS with your configuration"
+      echo ""
+      echo "Usage:"
+      echo "  sudo /etc/install-hermes.sh                    # Use default repo"
+      echo "  sudo /etc/install-hermes.sh <custom-repo-url>  # Use custom repo"
       echo ""
 
       # Check if already cloned
@@ -218,13 +224,13 @@
 
       PREREQUISITES:
       1. WiFi connection: nmtui
-      2. Your NixConf repo URL ready
+      2. Internet connectivity
 
       AUTOMATED INSTALLATION:
-      sudo /etc/install-hermes.sh [repo-url]
+      sudo /etc/install-hermes.sh
 
-      Example:
-      sudo /etc/install-hermes.sh https://github.com/yourusername/NixConf.git
+      Default repo: https://github.com/Gabz4200/gabz-nix-config.git
+      Custom repo:  sudo /etc/install-hermes.sh <your-repo-url>
 
       The script will:
       ✓ Clone your NixConf
@@ -254,7 +260,7 @@
       echo ""
       echo "Quick commands:"
       echo "  WiFi:    nmtui"
-      echo "  Install: sudo /etc/install-hermes.sh <your-repo-url>"
+      echo "  Install: sudo /etc/install-hermes.sh"
       echo ""
     fi
   '';
