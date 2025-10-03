@@ -48,7 +48,7 @@ in {
       type = types.attrs;
       default = let
         homeConfigs = lib.mapAttrs' (n: v: lib.nameValuePair (lib.last (lib.splitString "@" n)) v.config) outputs.homeConfigurations;
-        nixosConfigs = lib.mapAttrs (_: v: v.config.home-manager.users.gabz) outputs.nixosConfigurations;
+        nixosConfigs = lib.mapAttrs (_: v: v.config.home-manager.users.gabz) (lib.filterAttrs (_: v: v.config ? "home-manager") outputs.nixosConfigurations);
       in
         lib.mapAttrs (_: v: v.colorscheme.rawColorscheme.colors.${cfg.mode}) (homeConfigs // nixosConfigs);
     };
