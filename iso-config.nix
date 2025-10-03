@@ -19,6 +19,8 @@
     makeUsbBootable = true;
   };
 
+  image.fileName = lib.mkForce "nixos-hermes-installer.iso";
+
   # Enable experimental features for flakes
   nix.settings.experimental-features = ["nix-command" "flakes" "ca-derivations"];
 
