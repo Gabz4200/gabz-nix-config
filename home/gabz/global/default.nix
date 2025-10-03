@@ -39,7 +39,7 @@
     stateVersion = lib.mkDefault "25.05";
     sessionPath = ["$HOME/.local/bin"];
     sessionVariables = {
-      NH_FLAKE = "$HOME/Documents/NixConfig";
+      NH_FLAKE = "$HOME/NixConf";
     };
 
     persistence = {
