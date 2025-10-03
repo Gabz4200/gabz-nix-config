@@ -8,13 +8,13 @@
     settings = {
       user = {
         name = config.programs.git.userName;
-        email = config.programs.git.userEmail;
+        #todo: email = config.programs.git.userEmail;
       };
       ui = {
         pager = "less -FRX";
         show-cryptographic-signatures = true;
       };
-      signing = let
+      #todo: signing = let
         gitCfg = config.programs.git.extraConfig;
       in {
         backend = "gpg";
