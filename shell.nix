@@ -5,6 +5,7 @@
       nix
       home-manager
       git
+      cachix
 
       sops
       ssh-to-age
