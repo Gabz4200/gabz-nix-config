@@ -40,7 +40,7 @@
   };
 
   hardware.enableRedistributableFirmware = true;
-  networking.domain = "m7.rs";
+  #delete: networking.domain = "m7.rs";
 
   # Increase open file limit for sudoers
   security.pam.loginLimits = [
