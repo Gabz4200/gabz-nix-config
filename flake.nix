@@ -152,5 +152,17 @@
         };
       };
     };
+
+    # Installation ISO with your config pre-loaded
+    nixosConfigurations.iso = lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+        ./iso-config.nix
+      ];
+      specialArgs = {
+        inherit inputs outputs;
+      };
+    };
   };
 }

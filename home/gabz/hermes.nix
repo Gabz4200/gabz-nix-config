@@ -29,7 +29,7 @@ in {
     juju
     sshuttle
     incus-lts
-    
+
     aider-chat-full
     gemini-cli
     gpt4all
