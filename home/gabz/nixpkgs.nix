@@ -10,16 +10,16 @@
 in (
   {
     nix = {
-      settings = {
-        extra-substituters = lib.mkAfter ["https://cache.m7.rs"];
-        extra-trusted-public-keys = ["cache.m7.rs:kszZ/NSwE/TjhOcPPQ16IuUiuRSisdiIwhKZCxguaWg="];
+     settings = {
+    #   extra-substituters = lib.mkAfter #["https://cache.m7.rs"];
+#        extra-trusted-public-keys = #["cache.m7.rs:kszZ/NSwE/#TjhOcPPQ16IuUiuRSisdiIwhKZCxguaWg="];
         experimental-features = [
           "nix-command"
           "flakes"
           "ca-derivations"
         ];
         warn-dirty = false;
-        flake-registry = ""; # Disable global flake registry
+        #flake-registry = ""; # Disable # global flake registry
       };
       registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
     };
