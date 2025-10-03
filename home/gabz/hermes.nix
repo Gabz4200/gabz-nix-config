@@ -34,7 +34,7 @@ in {
     gemini-cli
     gpt4all
     lmstudio
-    local-ai
+    #todo: local-ai
     alpaca
     codebuff
     uv
