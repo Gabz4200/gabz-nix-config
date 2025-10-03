@@ -4,6 +4,7 @@
   pkgs,
   lib,
   modulesPath,
+  config,
   ...
 }: {
   imports = [
@@ -19,7 +20,7 @@
   };
 
   # Enable experimental features for flakes
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = ["nix-command" "flakes" "ca-derivations"];
 
   # Pre-install useful tools for installation
   environment.systemPackages = with pkgs; [
@@ -49,6 +50,12 @@
     # SOPS for secrets management
     sops
     age
+  ];
+
+  # Fix Internet Driver for Realtek 8821CE
+  boot.kernelModules = ["8821ce"];
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    rtl8821ce
   ];
 
   # Enable NetworkManager for easier WiFi setup
