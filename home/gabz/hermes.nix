@@ -43,18 +43,17 @@ in {
     inputs.claude-desktop.packages.${system}.claude-desktop-with-fhs
     librechat
     #todo:
-
-    (python3.withPackages
-    (ps:
-      with ps; [
-        langchain
-        langchain-openai
-        langchain-community
-        chromadb
-        sentence-transformers
-        llama-index
-        llama-cpp-python
-      ]))
+    #(python3.withPackages
+    #(ps:
+    # with ps; [
+    #   langchain
+    #   langchain-openai
+    #   langchain-community
+    #   chromadb
+    #   sentence-transformers
+    #   llama-index
+    #   llama-cpp-python
+    # ]))
     llama-cpp
   ];
 
