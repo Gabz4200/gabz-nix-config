@@ -33,7 +33,7 @@ in {
     ];
 
     openssh.authorizedKeys.keys = lib.splitString "\n" (builtins.readFile ../../../../home/gabz/ssh.pub);
-    hashedPasswordFile = config.sops.secrets.gabz-password.path;
+    #todo: hashedPasswordFile = config.sops.secrets.gabz-password.path;
     packages = with pkgs; [
       kdePackages.kate
       vscode.fhs
