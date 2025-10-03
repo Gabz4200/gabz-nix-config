@@ -44,12 +44,31 @@
 
     persistence = {
       "/persist".directories = [
+        # Standard XDG directories
+        "Desktop"
         "Documents"
         "Downloads"
+        "Music"
         "Pictures"
+        "Public"
+        "Templates"
         "Videos"
+        # Project directories
+        "NixConf" # Your NixOS configuration
+        # Development & tools
         ".local/bin"
         ".local/share/nix" # trusted settings and repl history
+        ".ssh" # SSH keys
+        ".config/sops" # SOPS/age keys for secrets
+        # Shell & terminal
+        ".local/share/fish" # Fish shell history
+        # Editors & IDEs
+        ".config/Code" # VSCode settings and extensions
+        ".vscode" # VSCode workspace data
+        ".config/github-copilot" # GitHub Copilot state
+        # Development tools
+        ".local/share/direnv" # Direnv allow list
+        ".cache/nix" # Nix evaluation cache
       ];
     };
   };

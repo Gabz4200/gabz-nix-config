@@ -73,6 +73,9 @@
   programs.appimage.enable = true;
   programs.appimage.binfmt = true;
 
+  services.ollama.enable = true;
+  #todo: services.ollama.loadModels = [];
+
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   # todo: Change to enable Xwayland

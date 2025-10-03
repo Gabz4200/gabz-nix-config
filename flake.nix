@@ -64,11 +64,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    claude-desktop = {
+      url = "github:k3d3/claude-desktop-linux-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     hydenix = {
       url = "github:richen604/hydenix/dev";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.hydenix-nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
       inputs.nixos-hardware.follows = "hardware";
+      inputs.hyde = {
+        url = "github:HyDE-Project/HyDE/master";
+        flake = false;
+      };
     };
 
     # My own programs, packaged with nix

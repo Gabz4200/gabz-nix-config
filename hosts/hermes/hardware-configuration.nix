@@ -11,10 +11,10 @@
 
   nixpkgs.hostPlatform.system = "x86_64-linux";
   boot.binfmt.emulatedSystems = [
-    "aarch64-linux"      # Keep for ARM Linux and Android (common for cross-platform builds)
-    "wasm32-wasi"        # WebAssembly 32-bit
-    "wasm64-wasi"        # WebAssembly 64-bit (if I need it)
-    "x86_64-windows"     # Windows 64-bit (rare, but I mentioned it)
+    "aarch64-linux" # Keep for ARM Linux and Android (common for cross-platform builds)
+    "wasm32-wasi" # WebAssembly 32-bit
+    "wasm64-wasi" # WebAssembly 64-bit (if I need it)
+    "x86_64-windows" # Windows 64-bit (rare, but I mentioned it)
   ];
   hardware.cpu.intel.updateMicrocode = true;
   powerManagement.cpuFreqGovernor = "ondemand";
@@ -83,7 +83,14 @@
           content = {
             type = "luks";
             name = hostName;
-            settings.allowDiscards = true;
+            settings = {
+              allowDiscards = true;
+              # Unlock interactively during boot (no keyFile needed)
+              # This makes the NixOS config pure - passwordFile only used during install
+            };
+            # Password will be set interactively during installation
+            # See INSTALLATION.md for details
+            passwordFile = "/tmp/luks-password";
             content = let
               this = config.disko.devices.disk.main.content.partitions.luks.content.content;
             in {

@@ -23,11 +23,45 @@ in {
   wallpaper = pkgs.inputs.themes.wallpapers.deer-lunar-fantasy;
 
   home.username = "gabz";
-  home.packages = [
-    pkgs.juju
-    pkgs.sshuttle
-    pkgs.incus-lts
+  home.packages = with pkgs; [
+    fh
+
+    juju
+    sshuttle
+    incus-lts
+    
+    aider-chat-full
+    gemini-cli
+    gpt4all
+    lmstudio
+    local-ai
+    alpaca
+    codebuff
+    uv
+    nodejs
+    docker
+    inputs.claude-desktop.packages.${system}.claude-desktop-with-fhs
+    librechat
+    #todo:
+
+    python3.withPackages
+    (ps:
+      with ps; [
+        langchain
+        langchain-openai
+        langchain-community
+        chromadb
+        sentence-transformers
+        llama-index
+        llama-cpp-python
+      ])
+    llama-cpp
   ];
+
+  programs.obsidian.enable = true;
+
+  programs.vscode.enable = true;
+  programs.zed-editor.enable = true;
 
   targets.genericLinux.enable = true;
   nixGL = {

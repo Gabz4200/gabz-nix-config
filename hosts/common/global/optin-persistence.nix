@@ -22,6 +22,8 @@
         "/var/lib/nixos"
         "/var/log"
         "/srv"
+        "/etc/NetworkManager/system-connections" # WiFi passwords
+        "/etc/ssh" # SSH host keys
       ];
     };
   };
