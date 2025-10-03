@@ -44,7 +44,7 @@ in {
     librechat
     #todo:
 
-    python3.withPackages
+    (python3.withPackages
     (ps:
       with ps; [
         langchain
@@ -54,7 +54,7 @@ in {
         sentence-transformers
         llama-index
         llama-cpp-python
-      ])
+      ]))
     llama-cpp
   ];
 
