@@ -15,15 +15,15 @@
         show-cryptographic-signatures = true;
       };
       #todo: signing = let
-        gitCfg = config.programs.git.extraConfig;
-      in {
-        backend = "gpg";
-        behaviour =
-          if gitCfg.commit.gpgSign
-          then "own"
-          else "never";
-        key = gitCfg.user.signing.key;
-      };
+      #  gitCfg = #config.programs.git.extraConfig;
+     # in {
+    #    backend = "gpg";
+   #     behaviour =
+    #      if gitCfg.commit.gpgSign
+   #       then "own"
+    #      else "never";
+   #     key = gitCfg.user.signing.key;
+    #  };
       revset-aliases = {
         "closest_bookmark(to)" = "heads(::to & bookmarks())";
       };
