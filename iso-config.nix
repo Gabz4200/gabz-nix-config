@@ -19,8 +19,6 @@
     makeUsbBootable = true;
   };
 
-  image.fileName = lib.mkForce "nixos-hermes-installer.iso";
-
   # Enable experimental features for flakes
   nix.settings.experimental-features = ["nix-command" "flakes" "ca-derivations"];
 
@@ -128,9 +126,10 @@
       fi
 
       echo "Running Disko partitioning..."
+      # Use --flake to properly evaluate the NixOS module with all inputs
       nix --experimental-features "nix-command flakes" run github:nix-community/disko -- \
         --mode disko \
-        ./hosts/hermes/hardware-configuration.nix
+        --flake .#hermes
 
       echo ""
       echo "Step 4: Verifying mounts..."
